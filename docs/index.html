@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LBPC Pulpit Schedule</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2328; --muted:#5d636b; --accent:#6b2d3c; --line:#e3ded4; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#16161a; --card:#202026; --ink:#ecebe8; --muted:#a3a3ab; --accent:#d48a9b; --line:#33333b; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width:520px; margin:0 auto; padding:40px 16px 56px; }
+  h1 { font:600 1.6rem/1.25 Georgia, "Times New Roman", serif; margin:0 0 6px; }
+  .sub { color:var(--muted); margin:0 0 28px; }
+  .btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%;
+         padding:15px 18px; margin:0 0 12px; border-radius:12px; border:1px solid var(--line);
+         background:var(--card); color:var(--ink); font-weight:600; font-size:1rem;
+         text-decoration:none; cursor:pointer; }
+  .btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color:#16161a; } }
+  .note { font-size:.9rem; color:var(--muted); margin:4px 0 24px; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+  summary { font-weight:600; cursor:pointer; }
+  details ol { padding-left:20px; margin:10px 0 0; }
+  code { word-break:break-all; font-size:.85rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>LBPC Pulpit Schedule</h1>
+  <p class="sub">Subscribe once. Any change to the preaching schedule appears in your calendar automatically.</p>
+
+  <a class="btn primary" id="apple" href="#">Add to iPhone / iPad / Mac Calendar</a>
+  <a class="btn" id="google" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
+  <button class="btn" id="copy" type="button">Copy calendar link</button>
+  <p class="note">Each service appears as an all-day event. Tap it to see the passage, sermon title and notes.</p>
+
+  <details>
+    <summary>Google Calendar on a phone</summary>
+    <ol>
+      <li>Google won't let you add calendars from its phone app. Open <b>calendar.google.com</b> in a browser instead (choose "Desktop site" on a phone).</li>
+      <li>Next to <b>Other calendars</b>, tap <b>+</b>, then <b>From URL</b>.</li>
+      <li>Paste the calendar link and tap <b>Add calendar</b>. It will then show in the Google Calendar app.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>How often does it update?</summary>
+    <p>Apple Calendar checks for updates based on your setting in Settings → Apps → Calendar → Accounts → Fetch New Data. Google Calendar checks on its own schedule, usually within a day.</p>
+  </details>
+  <p class="note">Link: <code id="url"></code></p>
+</main>
+<script>
+  // Works wherever this page is hosted: the feed sits next to it.
+  var ics = new URL("preaching.ics", location.href).href.replace(/^http:/, "https:");
+  var webcal = ics.replace(/^https:/, "webcal:");
+  document.getElementById("apple").href = webcal;
+  document.getElementById("google").href =
+    "https://calendar.google.com/calendar/r?cid=" + encodeURIComponent(webcal);
+  document.getElementById("url").textContent = ics;
+  document.getElementById("copy").addEventListener("click", function () {
+    var b = this;
+    function done() { b.textContent = "Copied"; setTimeout(function(){ b.textContent = "Copy calendar link"; }, 1800); }
+    if (navigator.clipboard) navigator.clipboard.writeText(ics).then(done, function(){ prompt("Copy this link:", ics); });
+    else prompt("Copy this link:", ics);
+  });
+</script>
+</body>
+</html>

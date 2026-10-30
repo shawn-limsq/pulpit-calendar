@@ -1,0 +1,562 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//LBPC//Pulpit Schedule//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALDESC:Pulpit schedule (source: schedule.docx). Updates automaticall
+ y.
+X-WR-CALNAME:LBPC Pulpit Schedule
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-PUBLISHED-TTL:PT1H
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: The Heart Matters
+DTSTART;VALUE=DATE:20270103
+DTEND;VALUE=DATE:20270104
+DTSTAMP:20261030T071404Z
+UID:b16ce1c11e65d5e7@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: The Trusting Heart
+DTSTART;VALUE=DATE:20270110
+DTEND;VALUE=DATE:20270111
+DTSTAMP:20261030T071404Z
+UID:91d078003d8be703@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: The Guarded Heart
+DTSTART;VALUE=DATE:20270117
+DTEND;VALUE=DATE:20270118
+DTSTAMP:20261030T071404Z
+UID:b1b32dc110a1db64@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: The Focused Heart
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+DTSTAMP:20261030T071404Z
+UID:a6427a11715195dd@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Gospel Sunday
+DTSTART;VALUE=DATE:20270131
+DTEND;VALUE=DATE:20270201
+DTSTAMP:20261030T071404Z
+UID:099906e75ba08d6f@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Lim Yew Cheng\nChairperson: Not confirmed\nSub-th
+ eme: Redeeming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: An Eternal Heart
+DTSTART;VALUE=DATE:20270207
+DTEND;VALUE=DATE:20270208
+DTSTAMP:20261030T071404Z
+UID:cc9363ec259f7669@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Daniel Khoo\nChairperson: Not confirmed\nSub-them
+ e: Redeeming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: A Faithful Heart
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+DTSTAMP:20261030T071404Z
+UID:6dd7932cb1a2ecff@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: A Gospel-Driven Heart
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+DTSTAMP:20261030T071404Z
+UID:2bbb9d9e765effb1@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: A Discerning Heart
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+DTSTAMP:20261030T071404Z
+UID:e4862895bf5c0040@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Shepherding a Child’s Heart
+DTSTART;VALUE=DATE:20270307
+DTEND;VALUE=DATE:20270308
+DTSTAMP:20261030T071404Z
+UID:3c99f53b648b946a@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Ps Tan Soon Yong\nChairperson: Not confirmed\nSub-the
+ me: Redeeming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: An Obedient Heart
+DTSTART;VALUE=DATE:20270314
+DTEND;VALUE=DATE:20270315
+DTSTAMP:20261030T071404Z
+UID:9b21492210eed462@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Palm Sunday
+DTSTART;VALUE=DATE:20270321
+DTEND;VALUE=DATE:20270322
+DTSTAMP:20261030T071404Z
+UID:169bbfc6e7fafbe1@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Good Friday
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+DTSTAMP:20261030T071404Z
+UID:2c8741bf3fc4655c@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Easter Sunday
+DTSTART;VALUE=DATE:20270328
+DTEND;VALUE=DATE:20270329
+DTSTAMP:20261030T071404Z
+UID:05d3e8dfd7a200f6@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time Begins with a Heart of Wisdom
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Come Clean Before God
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+DTSTAMP:20261030T071404Z
+UID:217bdb146af77493@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Lim Chien Chong\nChairperson: Not confirmed\nSub-t
+ heme: Redeeming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Give to God
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270412
+DTSTAMP:20261030T071404Z
+UID:7089fbc53e4e373c@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Love that Pleases God
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+DTSTAMP:20261030T071404Z
+UID:dc0dfdd807bf8a7a@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: LBPC ACM Message
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+DTSTAMP:20261030T071404Z
+UID:bf5891b4c8f70ce5@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Eld Clement\nChairperson: Not confirmed\nSub-theme: R
+ edeeming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Diligence Before God
+DTSTART;VALUE=DATE:20270502
+DTEND;VALUE=DATE:20270503
+DTSTAMP:20261030T071404Z
+UID:3f1568e40132caef@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Mother’s Day Message
+DTSTART;VALUE=DATE:20270509
+DTEND;VALUE=DATE:20270510
+DTSTAMP:20261030T071404Z
+UID:568993afd221234b@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Forgiven by God
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270517
+DTSTAMP:20261030T071404Z
+UID:8b00d616470c5242@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Persistent Prayer to God
+DTSTART;VALUE=DATE:20270523
+DTEND;VALUE=DATE:20270524
+DTSTAMP:20261030T071404Z
+UID:e8788254af20143a@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Gospel Sunday
+DTSTART;VALUE=DATE:20270530
+DTEND;VALUE=DATE:20270531
+DTSTAMP:20261030T071404Z
+UID:8f5d42953cd08ed7@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Tan EB\nChairperson: Not confirmed\nSub-theme: Re
+ deeming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: A Light for God
+DTSTART;VALUE=DATE:20270606
+DTEND;VALUE=DATE:20270607
+DTSTAMP:20261030T071404Z
+UID:c68714eaf8ea3818@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Friendship that Pleases God
+DTSTART;VALUE=DATE:20270613
+DTEND;VALUE=DATE:20270614
+DTSTAMP:20261030T071404Z
+UID:fdb399be0611c7f2@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Father’s Day Message
+DTSTART;VALUE=DATE:20270620
+DTEND;VALUE=DATE:20270621
+DTSTAMP:20261030T071404Z
+UID:3bfdda5128726b45@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Peter Chng\nChairperson: Not confirmed\nSub-theme
+ : Redeeming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Self-control by the Grace of God
+DTSTART;VALUE=DATE:20270627
+DTEND;VALUE=DATE:20270628
+DTSTAMP:20261030T071404Z
+UID:6fe88b3408a6e1fb@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time by Living in God’s Presence
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Youth Day Message – The Choice of a Lifeti
+ me
+DTSTART;VALUE=DATE:20270704
+DTEND;VALUE=DATE:20270705
+DTSTAMP:20261030T071404Z
+UID:9187513e13d6b471@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Words of Life or Death?
+DTSTART;VALUE=DATE:20270711
+DTEND;VALUE=DATE:20270712
+DTSTAMP:20261030T071404Z
+UID:6fd6960314c2249e@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Ruin or Restoration?
+DTSTART;VALUE=DATE:20270718
+DTEND;VALUE=DATE:20270719
+DTSTAMP:20261030T071404Z
+UID:5d37395dd98b82a2@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev William Yap\nChairperson: Not confirmed\nSub-them
+ e: Redeeming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Abasement or Arrogance?
+DTSTART;VALUE=DATE:20270725
+DTEND;VALUE=DATE:20270726
+DTSTAMP:20261030T071404Z
+UID:2d43ffe089e6091c@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Wasted or Fruitful Life?
+DTSTART;VALUE=DATE:20270801
+DTEND;VALUE=DATE:20270802
+DTSTAMP:20261030T071404Z
+UID:af3d005400d61f43@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: National Day Message
+DTSTART;VALUE=DATE:20270808
+DTEND;VALUE=DATE:20270809
+DTSTAMP:20261030T071404Z
+UID:edad65e04c9fe7d8@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Obedience or Lip-Service?
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270816
+DTSTAMP:20261030T071404Z
+UID:67d05c2a06ec0cde@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Religion or Relationship?
+DTSTART;VALUE=DATE:20270822
+DTEND;VALUE=DATE:20270823
+DTSTAMP:20261030T071404Z
+UID:8d8a33ed0fe95b35@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Eld Michael Ong\nChairperson: Not confirmed\nSub-them
+ e: Redeeming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Gospel Sunday
+DTSTART;VALUE=DATE:20270829
+DTEND;VALUE=DATE:20270830
+DTSTAMP:20261030T071404Z
+UID:3c0ad1361bfc7823@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Calvin\nChairperson: Not confirmed\nSub-theme: Re
+ deeming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Integrity or Dishonesty?
+DTSTART;VALUE=DATE:20270905
+DTEND;VALUE=DATE:20270906
+DTSTAMP:20261030T071404Z
+UID:efcc34423c664872@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Mark Chen\nChairperson: Not confirmed\nSub-theme:
+  Redeeming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Faithfulness or Regret?
+DTSTART;VALUE=DATE:20270912
+DTEND;VALUE=DATE:20270913
+DTSTAMP:20261030T071404Z
+UID:d3023d44722b0e21@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: God or Chance?
+DTSTART;VALUE=DATE:20270919
+DTEND;VALUE=DATE:20270920
+DTSTAMP:20261030T071404Z
+UID:f3160d114cc2661a@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Prudence or Recklessness?
+DTSTART;VALUE=DATE:20270926
+DTEND;VALUE=DATE:20270927
+DTSTAMP:20261030T071404Z
+UID:870212ca8019cbd8@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time by Making Wise Choices
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Are You Found and Faithful?
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+DTSTAMP:20261030T071404Z
+UID:ced9affc5f1209d9@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Do You Plan for the Future or Plan to Fail?
+DTSTART;VALUE=DATE:20271010
+DTEND;VALUE=DATE:20271011
+DTSTAMP:20261030T071404Z
+UID:5fecdf8eadc68f80@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Eld Roger\nChairperson: Not confirmed\nSub-theme: Red
+ eeming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Church 77th Anniversary
+DTSTART;VALUE=DATE:20271017
+DTEND;VALUE=DATE:20271018
+DTSTAMP:20261030T071404Z
+UID:838eeaa7d043e0c7@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: What Kind of Servant Are You?
+DTSTART;VALUE=DATE:20271024
+DTEND;VALUE=DATE:20271025
+DTSTAMP:20261030T071404Z
+UID:a549325c6ed1d726@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Reformation Sunday Message
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271101
+DTSTAMP:20261030T071404Z
+UID:36a2542a15dda17a@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Calvin\nChairperson: Not confirmed\nSub-theme: Re
+ deeming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Are You Living Beyond Today?
+DTSTART;VALUE=DATE:20271107
+DTEND;VALUE=DATE:20271108
+DTSTAMP:20261030T071404Z
+UID:37e8ac56dd6827b5@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Have you Abused Your Stewardship?
+DTSTART;VALUE=DATE:20271114
+DTEND;VALUE=DATE:20271115
+DTSTAMP:20261030T071404Z
+UID:6730e46615f17014@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Dn Shawn\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: What Will God Reward You For?
+DTSTART;VALUE=DATE:20271121
+DTEND;VALUE=DATE:20271122
+DTSTAMP:20261030T071404Z
+UID:56a2c95c6b6a2592@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: What Riches Are You Living For?
+DTSTART;VALUE=DATE:20271128
+DTEND;VALUE=DATE:20271129
+DTSTAMP:20261030T071404Z
+UID:17daa34d3a29a291@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Eld Ng BK\nChairperson: Not confirmed\nSub-theme: Red
+ eeming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: How Different Are You From the World?
+DTSTART;VALUE=DATE:20271205
+DTEND;VALUE=DATE:20271206
+DTSTAMP:20261030T071404Z
+UID:ff19f48006754550@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: How Ready Are You for the End?
+DTSTART;VALUE=DATE:20271212
+DTEND;VALUE=DATE:20271213
+DTSTAMP:20261030T071404Z
+UID:319000fedf2e8ad6@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Quek\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Combined Christmas Svc Msg
+DTSTART;VALUE=DATE:20271219
+DTEND;VALUE=DATE:20271220
+DTSTAMP:20261030T071404Z
+UID:eff0850d05715b8b@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Christmas Eve Message
+DTSTART;VALUE=DATE:20271224
+DTEND;VALUE=DATE:20271225
+DTSTAMP:20261030T071404Z
+UID:ea55321b30d03af6@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Bro Mok\nChairperson: Not confirmed\nSub-theme: Redee
+ ming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Are You Prepared for Christ’s Soon Return?
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+DTSTAMP:20261030T071404Z
+UID:2b2f3ab139d77fdf@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Ho\nChairperson: Not confirmed\nSub-theme: Redeem
+ ing the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LBPC Worship Service: Watchnight Service Message
+DTSTART;VALUE=DATE:20271231
+DTEND;VALUE=DATE:20280101
+DTSTAMP:20261030T071404Z
+UID:91f9f52d7c99873d@pulpit.lifebpc.com
+DESCRIPTION:Speaker: Rev Seet\nChairperson: Not confirmed\nSub-theme: Rede
+ eming the Time by Being Always Ready
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

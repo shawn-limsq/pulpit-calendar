@@ -1,74 +1,80 @@
 # LBPC Pulpit Schedule — auto-updating calendar
 
-This project turns the pulpit schedule (Word, PDF, Excel or CSV) into a calendar that people subscribe to once. Whenever the schedule changes, GitHub rebuilds the calendar, and everyone's iPhone or Google Calendar picks up the change.
+This project turns the pulpit schedule into a calendar that people subscribe to once. Every hour, GitHub checks the LBPC shared drive for a newer version of the schedule. If it finds one, it rebuilds the calendar, and everyone's iPhone or Google Calendar picks up the change.
 
-- `schedule/` holds the current schedule file.
-- `build_calendar.py` reads the newest file in `schedule/` and writes `docs/preaching.ics`. Every service becomes an **all-day event** titled like *Rev Seet: The Heart Matters (Lk 8:1-15)*. The passage, chairperson, series, notes and movement go in the event details.
-- `docs/index.html` is the page you share. It has "Add to iPhone" and "Add to Google Calendar" buttons.
-- `.github/workflows/update-calendar.yml` rebuilds the calendar when a new file is uploaded, and once an hour checks Google Drive (optional).
-- `fetch_from_drive.py` downloads the schedule from Google Drive (optional).
+**Each Sunday (and special service) is an all-day event:**
 
-Columns are matched **by their header names**, not their position, so the new format with a **Chairperson** column works without any code changes. These headers are recognised (case doesn't matter):
+- **Title:** `LBPC Worship Service: <sermon title>`
+- **Description:**
+  ```
+  Speaker: Rev Seet
+  Chairperson: Not confirmed
+  Sub-theme: Redeeming the Time Begins with a Heart of Wisdom
+  ```
 
-| Field | Header can contain |
+The 2027 quarterly sub-themes are set at the top of `build_calendar.py` (`SUBTHEMES`):
+
+| Quarter | Sub-theme |
 |---|---|
-| Date (required) | date |
-| Passage | text, passage, scripture, reading |
-| Sermon title | title, sermon, topic, theme |
-| Speaker | speaker, preacher |
-| Chairperson | chair, presiding, worship leader, liturgist |
-| Notes | notes, remarks, description |
-| Movement | movement, events |
+| Jan–Mar | Redeeming the Time Begins with a Heart of Wisdom |
+| Apr–Jun | Redeeming the Time by Living in God’s Presence |
+| Jul–Sep | Redeeming the Time by Making Wise Choices |
+| Oct–Dec | Redeeming the Time by Being Always Ready |
 
-Dates like `03 Jan 27`, `3 January 2027`, `Sun, 3rd Jan 2027`, `03/01/2027` and real Excel dates all work. Full-width rows (such as the quarter headings) are recorded as the event's "Series".
+The chairperson shows as "Not confirmed" until a quarterly file lists one for that date.
+
+## What's in here
+- `schedule/baseline/` holds the full-year speaker schedule currently in use. `SOURCE.txt` records which Drive file it came from.
+- `schedule/quarterly/` holds the quarterly files with chairpersons.
+- `build_calendar.py` combines them and writes `docs/preaching.ics`.
+- `fetch_from_drive.py` finds the latest versions in the Drive folder.
+- `docs/index.html` is the page you share, with "Add to iPhone" and "Add to Google Calendar" buttons.
+- `.github/workflows/update-calendar.yml` runs the Drive check every hour, and also whenever a file is uploaded to `schedule/`.
+
+### Two kinds of schedule file
+
+1. **Full-year schedule (baseline).** It supplies every date, speaker and sermon title.
+2. **Quarterly files.** Each covers one quarter, with speakers, sermon titles and chairpersons. For the dates it covers, **the quarterly file wins**: its speaker, title and chairperson replace the full-year values. A blank cell keeps the full-year value. A date that isn't in the full-year schedule is added.
+   - Quarterly files build up. The Q2 file doesn't affect Q1's dates.
+   - If there are two versions of the same quarter, the newer one (higher version number in the name, otherwise the later one) is used for the dates it lists.
+
+### How the full-year "latest version" is chosen
+The workflow looks in the LBPC shared drive **only at files whose name starts with `Schedule of Pulpit Sermons`**. It picks the one with the **highest version number** in its name: `(v.10.0)` beats `(v.9.0)`, and `ver. 9.5` also works. If versions tie, the most recently modified file wins. Other files in the drive (prayer meeting schedule, budget, drafts, etc.) are ignored.
+
+So when a new version is ready, save it to the shared drive with the same naming pattern and a higher version number. Word, PDF, Excel, Google Doc or Google Sheet all work, as long as the table has the same column headings (Date, Text, Title, Speaker…).
 
 ---
 
-## One-time setup (about 10 minutes)
+## One-time setup
 
-### 1. Create the repository
-1. On GitHub, click **New repository**. Name it, for example, `pulpit-calendar`, and set it to **Public**. A free GitHub plan only publishes Pages from public repositories, and the calendar link is public in any case.
+### 1. Create the repository (5 min)
+1. On GitHub, click **New repository**. Name it, for example, `pulpit-calendar`, and set it to **Public**. A free plan only publishes Pages from public repos, and the calendar link is public in any case.
 2. Click **uploading an existing file** and drag in everything from this folder.
-   - **Mac users:** Finder hides the `.github` folder. Press **Cmd + Shift + .** in Finder to show it before dragging. Or, after uploading, choose **Add file → Create new file**, type `.github/workflows/update-calendar.yml` as the name, and paste in that file's contents.
+   *Mac users:* Finder hides the `.github` folder. Press **Cmd + Shift + .** to show it before dragging.
 3. Commit.
+4. Go to **Settings → Actions → General → Workflow permissions**, select **Read and write permissions**, and save.
+5. Go to **Settings → Pages**. Set Source to **Deploy from a branch**, Branch to **main**, folder **/docs**, and save.
 
-### 2. Allow the workflow to save updates
-**Settings → Actions → General → Workflow permissions →** select **Read and write permissions** → Save.
+The page is live at `https://YOUR-USERNAME.github.io/pulpit-calendar/` within a minute. Share that link.
 
-### 3. Turn on the web page
-**Settings → Pages → Build and deployment →** Source: **Deploy from a branch**, Branch: **main**, folder **/docs** → Save.
+### 2. Give GitHub read access to the shared drive (10 min)
+1. Go to <https://console.cloud.google.com> and create a project. Then go to **APIs & Services → Enable APIs and services** and enable **Google Drive API**.
+2. Go to **IAM & Admin → Service Accounts → Create service account**. No roles are needed. Open it, then go to **Keys → Add key → Create new key → JSON**. This downloads a key file.
+3. **Add the service account's email** (`…@….iam.gserviceaccount.com`) **to the shared drive as a Viewer.** This must be done by a shared-drive **Manager** (currently cseet@lifebpc.com). Content managers can't add members.
+   *If Google blocks it, your Workspace admin needs to allow sharing with that address.*
+4. In GitHub, go to **Settings → Secrets and variables → Actions → New repository secret**. Name it `GDRIVE_SA_JSON` and paste the whole contents of the JSON key file.
+5. Go to **Actions → Update calendar → Run workflow** to test. The log lists which schedule files it found and which one it used.
 
-After a minute, your page is live at:
-`https://YOUR-USERNAME.github.io/pulpit-calendar/`
+*Optional:* if the schedules later move into their own folder, add a secret `GDRIVE_FOLDER_ID` with that folder's ID.
 
-Share **that page link** with the congregation. Each person taps the button for their calendar once.
-
----
-
-## Updating the schedule
-
-### Option A — upload the new file (simplest)
-In the repo, open `schedule/` → **Add file → Upload files** → drop in the new schedule → Commit.
-The newest file wins, so you can leave older ones there, though deleting them keeps things tidy. The calendar rebuilds within about a minute (check the **Actions** tab).
-
-### Option B — fully automatic from Google Drive
-The workflow checks Drive every hour and rebuilds only when something changed. This requires a Google service account:
-
-1. In <https://console.cloud.google.com>, create a project → **APIs & Services → Enable APIs** → enable **Google Drive API**.
-2. **IAM & Admin → Service Accounts → Create**. No roles are needed. Open it → **Keys → Add key → JSON**, which downloads a key file.
-3. In Google Drive, **share the schedule file (or its folder) with the service account's email** (`…@….iam.gserviceaccount.com`) as **Viewer**.
-   *If sharing is blocked, your Google Workspace admin may need to allow sharing with that address.*
-4. In GitHub: **Settings → Secrets and variables → Actions → New repository secret**:
-   - `GDRIVE_SA_JSON` → paste the whole contents of the JSON key file
-   - and **one** of:
-     - `GDRIVE_FILE_ID` → `1E-5hytSfSSO6TtWtK7un_dBUo_p53DLq`. Use this if the schedule is always edited in this same file.
-     - `GDRIVE_FOLDER_ID` → the ID of a Drive folder. Use this if each new version is a *new* file (for example, the upcoming format with the chairperson). The newest Word, PDF, Excel, Google Doc or Google Sheet in the folder is used.
-5. **Actions → Update calendar → Run workflow** to test it.
+### 3. When the quarterly files start (2 min)
+Go to **Settings → Secrets and variables → Actions → Variables tab → New repository variable**. Name it `QUARTERLY_NAME_PREFIX` and set its value to how the quarterly files' names begin (for example `Pulpit Roster`). Every file in the drive starting with that text is then used as a quarterly file. If its column headings differ from Date / Speaker / Title / Chairperson, the parser may need a small update.
 
 ---
 
 ## Good to know
-- **Changes update, they don't duplicate.** Each event's ID is based on its date, so changing the speaker or title for a date updates the existing event. Removing a date from the schedule removes it from calendars.
-- **Refresh speed:** iPhones follow the user's Calendar fetch setting. Google Calendar refreshes subscribed calendars on its own schedule, usually within a day, and this can't be changed.
-- **GitHub pauses hourly jobs** in a repo with no activity for 60 days. If Drive sync stops, open **Actions → Update calendar** and click **Enable workflow**. Uploading a file always triggers a build regardless.
-- **Run it locally:** `pip install -r requirements.txt && python build_calendar.py`
+- **Changes update, they don't duplicate.** Each event's ID is based on its date, so a changed speaker or title updates the existing event. A date removed from the schedule disappears from calendars.
+- **Refresh speed:** iPhones follow the user's Calendar fetch setting. Google Calendar refreshes subscribed calendars on its own schedule, usually within a day.
+- **Manual upload:** you can upload a full-year file into `schedule/baseline/` or a quarterly file into `schedule/quarterly/` on GitHub. The calendar rebuilds within a minute. With the Drive check on, `schedule/quarterly/` mirrors Drive, so put quarterly files in Drive rather than uploading them here.
+- **If the hourly check stops:** GitHub pauses scheduled jobs in repos with no activity for 60 days. Go to **Actions → Update calendar** and click **Enable workflow**.
+- **New schedule format:** if a version arrives with different column headings, the build will fail and GitHub emails the repo owner. The parser needs a small update for that format.

@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Build the pulpit-schedule calendar feed from the newest file in schedule/.
+"""Build the pulpit-schedule calendar feed.
+
+The full-year schedule in schedule/baseline/ supplies every date. Quarterly
+files in schedule/quarterly/ (with chairpersons) override speaker, title and
+chairperson for the dates they cover.
 
 Supports .docx, .pdf, .xlsx and .csv. Columns are matched by their header
 names, so a new format with extra columns (e.g. Chairperson) works as long as
 the header row has recognisable names. Every event is an all-day event.
 
-Usage: python build_calendar.py [path/to/schedule-file]
+Usage: python build_calendar.py [baseline-file [quarterly-file ...]]
 Output: docs/preaching.ics
 """
 import csv
@@ -19,9 +23,30 @@ from icalendar import Calendar, Event
 
 ROOT = Path(__file__).resolve().parent
 SCHEDULE_DIR = ROOT / "schedule"
+BASELINE_DIR = SCHEDULE_DIR / "baseline"    # full-year speaker schedule
+QUARTERLY_DIR = SCHEDULE_DIR / "quarterly"  # quarterly files with chairpersons
 OUT = ROOT / "docs" / "preaching.ics"
 CAL_NAME = "LBPC Pulpit Schedule"
 UID_DOMAIN = "pulpit.lifebpc.com"
+EVENT_PREFIX = "LBPC Worship Service"
+
+# Quarterly sub-themes, by year. Q1 = Jan–Mar, Q2 = Apr–Jun, and so on.
+# For a year not listed here, the quarter heading row in the schedule is used.
+SUBTHEMES = {
+    2027: [
+        "Redeeming the Time Begins with a Heart of Wisdom",
+        "Redeeming the Time by Living in God’s Presence",
+        "Redeeming the Time by Making Wise Choices",
+        "Redeeming the Time by Being Always Ready",
+    ],
+}
+
+
+def subtheme_for(svc):
+    year_themes = SUBTHEMES.get(svc["date"].year)
+    if year_themes:
+        return year_themes[(svc["date"].month - 1) // 3]
+    return svc["series"].title() if svc["series"].isupper() else svc["series"]
 
 # Header names (lower-case, substring match) -> field
 COLUMN_ALIASES = {
@@ -159,19 +184,16 @@ def build_ics(services, source_name):
         uid_key = s["date"].isoformat() + (f"-{n}" if n else "")
         uid = hashlib.sha1(uid_key.encode()).hexdigest()[:16] + "@" + UID_DOMAIN
 
-        title_line = s["title"].replace("\n", " – ")
-        summary = f"{s['speaker'] or 'TBA'}: {title_line}" if title_line else (s["speaker"] or "Service")
-        if s["text"]:
-            summary += f" ({s['text'].splitlines()[0]})"
+        sermon = s["title"].replace("\n", " – ") or "TBA"
+        summary = f"{EVENT_PREFIX}: {sermon}"
 
-        desc = []
-        for label, key in [("Speaker", "speaker"), ("Chairperson", "chair"),
-                           ("Passage", "text"), ("Sermon", "title"),
-                           ("Series", "series"), ("Also", "movement")]:
-            if s.get(key):
-                desc.append(f"{label}: {s[key].replace(chr(10), ' – ')}")
-        if s["notes"]:
-            desc.append("\n" + s["notes"])
+        desc = [
+            f"Speaker: {s['speaker'] or 'TBA'}",
+            f"Chairperson: {s['chair'] or 'Not confirmed'}",
+        ]
+        subtheme = subtheme_for(s)
+        if subtheme:
+            desc.append(f"Sub-theme: {subtheme}")
 
         ev = Event()
         ev.add("uid", uid)
@@ -198,27 +220,80 @@ def _changed_at(p):
     return p.stat().st_mtime
 
 
-def newest_schedule():
-    files = [p for p in SCHEDULE_DIR.iterdir() if p.suffix.lower() in READERS]
-    if not files:
-        sys.exit("No schedule file found in schedule/")
-    return max(files, key=_changed_at)
+VERSION_RE = re.compile(r"\bv(?:er(?:sion)?)?\.?\s*(\d+(?:\.\d+)*)", re.I)
+
+
+def version_of(name):
+    m = VERSION_RE.search(name)
+    return tuple(int(x) for x in m.group(1).split(".")) if m else ()
+
+
+def schedule_files(folder):
+    if not folder.is_dir():
+        return []
+    return [p for p in folder.iterdir() if p.suffix.lower() in READERS]
+
+
+def newest(files):
+    """Highest version in the file name wins; ties go to the most recent upload."""
+    return max(files, key=lambda p: (version_of(p.name), _changed_at(p)))
+
+
+def read_services(path):
+    services = extract_services(READERS[path.suffix.lower()](path))
+    if not services:
+        sys.exit(f"Found no dated rows in {path.name}; check the header row has a 'Date' column.")
+    return services
+
+
+def apply_quarterly(base, quarterly_files):
+    """Quarterly files override the baseline for the dates they cover.
+
+    For each date, only the newest quarterly file that lists it is used, so a
+    revised Q1 file replaces the earlier Q1 file, while Q2 leaves Q1 alone.
+    Speaker, title and chairperson from the quarterly file win; a blank cell
+    keeps the baseline value. Dates missing from the baseline are added.
+    """
+    by_date = {}
+    for s in base:
+        by_date.setdefault(s["date"], s)
+    claimed = set()
+    ordered = sorted(quarterly_files, key=lambda p: (version_of(p.name), _changed_at(p)), reverse=True)
+    for path in ordered:
+        for q in read_services(path):
+            if q["date"] in claimed:
+                continue
+            target = by_date.get(q["date"])
+            if target is None:
+                base.append(q)
+                by_date[q["date"]] = q
+            else:
+                for field in ("speaker", "title", "chair"):
+                    if q[field]:
+                        target[field] = q[field]
+            claimed.add(q["date"])
+    return base
 
 
 def main():
-    path = Path(sys.argv[1]) if len(sys.argv) > 1 else newest_schedule()
-    rows = READERS[path.suffix.lower()](path)
-    services = extract_services(rows)
-    if not services:
-        sys.exit(f"Found no dated rows in {path.name}; check the header row has a 'Date' column.")
-    new = build_ics(services, path.name)
+    if len(sys.argv) > 1:
+        base_path, quarterly = Path(sys.argv[1]), [Path(a) for a in sys.argv[2:]]
+    else:
+        base_files = schedule_files(BASELINE_DIR)
+        if not base_files:
+            sys.exit("No full-year schedule found in schedule/baseline/")
+        base_path, quarterly = newest(base_files), schedule_files(QUARTERLY_DIR)
+
+    services = apply_quarterly(read_services(base_path), quarterly)
+    sources = base_path.name + (f" + {len(quarterly)} quarterly file(s)" if quarterly else "")
+    new = build_ics(services, base_path.name)
     strip = lambda b: re.sub(rb"DTSTAMP:[^\r\n]*", b"", b)
     if OUT.exists() and strip(OUT.read_bytes()) == strip(new):
-        print(f"{len(services)} services from {path.name}; no changes to the calendar.")
+        print(f"{len(services)} services from {sources}; no changes to the calendar.")
         return
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_bytes(new)
-    print(f"{len(services)} services from {path.name} -> {OUT.relative_to(ROOT)}")
+    print(f"{len(services)} services from {sources} -> {OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
