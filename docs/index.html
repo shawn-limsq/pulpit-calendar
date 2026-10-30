@@ -80,8 +80,11 @@
   var ics = new URL("preaching.ics", location.href).href.replace(/^http:/, "https:");
   var webcal = ics.replace(/^https:/, "webcal:");
   document.getElementById("apple").href = webcal;
+  // Google keeps its own copy of a feed per link. Bump this number to make
+  // new Google subscribers get a fresh copy straight away.
+  var googleVersion = 2;
   document.getElementById("google").href =
-    "https://calendar.google.com/calendar/r?cid=" + encodeURIComponent(webcal);
+    "https://calendar.google.com/calendar/r?cid=" + encodeURIComponent(webcal + "?v=" + googleVersion);
   document.getElementById("url").textContent = ics;
   document.getElementById("copy").addEventListener("click", function () {
     var b = this;
