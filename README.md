@@ -4,7 +4,7 @@ This project turns the pulpit schedule into a calendar that people subscribe to 
 
 **Each Sunday (and special service) is an all-day event:**
 
-- **Title:** `LBPC Worship Service: <sermon title>`
+- **Title:** `LBPC Worship Service: <sermon title> (<passage>)`
 - **Description:**
   ```
   Speaker: Rev Seet

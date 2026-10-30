@@ -201,6 +201,10 @@ def build_ics(services, source_name):
 
         sermon = s["title"].replace("\n", " – ") or "TBA"
         summary = f"{EVENT_PREFIX}: {sermon}"
+        # Inner brackets avoid nested parentheses: "(Lk 8:1-15 [cf Matt 13])"
+        passage = " ".join(s["text"].split()).replace("(", "[").replace(")", "]")
+        if passage:
+            summary += f" ({passage})"
 
         desc = [
             f"Speaker: {s['speaker'] or 'TBA'}",
