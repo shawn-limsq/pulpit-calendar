@@ -7,7 +7,8 @@ chairperson for the dates they cover.
 
 Supports .docx, .pdf, .xlsx and .csv. Columns are matched by their header
 names, so a new format with extra columns (e.g. Chairperson) works as long as
-the header row has recognisable names. Every event is an all-day event.
+the header row has recognisable names. Service times are set in SERVICE_TIMES
+below; a service that matches no rule becomes an all-day event.
 
 Usage: python build_calendar.py [baseline-file [quarterly-file ...]]
 Output: docs/preaching.ics
@@ -17,6 +18,7 @@ import hashlib
 import re
 import sys
 from datetime import date, datetime, timedelta, timezone
+from datetime import time as clock
 from pathlib import Path
 
 from icalendar import Calendar, Event
@@ -28,7 +30,28 @@ QUARTERLY_DIR = SCHEDULE_DIR / "quarterly"  # quarterly files with chairpersons
 OUT = ROOT / "docs" / "preaching.ics"
 CAL_NAME = "LBPC Pulpit Schedule"
 UID_DOMAIN = "pulpit.lifebpc.com"
-EVENT_PREFIX = "LBPC Worship Service"
+EVENT_PREFIX = "LBPC Worship"
+SGT = timezone(timedelta(hours=8))  # Singapore, no daylight saving
+
+# Service times (Singapore time), checked in order against the sermon title
+# (case-insensitive). The first rule whose keyword appears in the title wins.
+# None means an all-day event (time not confirmed).
+SERVICE_TIMES = [
+    (("combined", "acm", "anniversary", "easter"), [(clock(9, 0), clock(10, 45))]),
+    (("good friday",), [(clock(9, 0), clock(10, 45))]),
+    (("watchnight",), [(clock(22, 30), clock(0, 0))]),   # ends at midnight
+    (("christmas eve",), None),                          # time not confirmed
+]
+SUNDAY_TIMES = [(clock(8, 0), clock(9, 15)), (clock(11, 0), clock(12, 15))]
+
+
+def service_times(svc):
+    """List of (start, end) times for a service, or None for all-day."""
+    title = " ".join(svc["title"].split()).lower()
+    for keywords, times in SERVICE_TIMES:
+        if any(k in title for k in keywords):
+            return times
+    return SUNDAY_TIMES if svc["date"].weekday() == 6 else None
 
 # Quarterly sub-themes, by year. Q1 = Jan–Mar, Q2 = Apr–Jun, and so on.
 # For a year not listed here, the quarter heading row in the schedule is used.
@@ -214,15 +237,29 @@ def build_ics(services, source_name):
         if subtheme:
             desc.append(f"Sub-theme: {subtheme}")
 
-        ev = Event()
-        ev.add("uid", uid)
-        ev.add("dtstamp", stamp)
-        ev.add("dtstart", s["date"])
-        ev.add("dtend", s["date"] + timedelta(days=1))
-        ev.add("summary", summary)
-        ev.add("description", "\n".join(desc))
-        ev.add("transp", "TRANSPARENT")  # all-day, doesn't block time
-        cal.add_component(ev)
+        times = service_times(s)
+        slots = times or [None]
+        for i, slot in enumerate(slots):
+            ev = Event()
+            # The first service of the day keeps the date-based UID, so
+            # existing subscribers' events are updated rather than duplicated.
+            ev.add("uid", uid if i == 0 else uid.replace("@", f"-{i + 1}@", 1))
+            ev.add("dtstamp", stamp)
+            if slot is None:
+                ev.add("dtstart", s["date"])
+                ev.add("dtend", s["date"] + timedelta(days=1))
+            else:
+                start = datetime.combine(s["date"], slot[0], SGT)
+                end = datetime.combine(s["date"], slot[1], SGT)
+                if end <= start:  # runs past midnight
+                    end += timedelta(days=1)
+                # Written in UTC so no time-zone block is needed in the feed
+                ev.add("dtstart", start.astimezone(timezone.utc))
+                ev.add("dtend", end.astimezone(timezone.utc))
+            ev.add("summary", summary)
+            ev.add("description", "\n".join(desc))
+            ev.add("transp", "TRANSPARENT")  # doesn't mark you as busy
+            cal.add_component(ev)
     return cal.to_ical()
 
 

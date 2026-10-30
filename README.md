@@ -2,9 +2,11 @@
 
 This project turns the pulpit schedule into a calendar that people subscribe to once. Every hour, GitHub checks the LBPC shared drive for a newer version of the schedule. If it finds one, it rebuilds the calendar, and everyone's iPhone or Google Calendar picks up the change.
 
-**Each Sunday (and special service) is an all-day event:**
+**Each Sunday has two events, 8:00–9:15 am and 11:00 am–12:15 pm.** Combined services (titles containing Combined, ACM, Anniversary or Easter) and Good Friday are one event, 9:00–10:45 am. Watchnight is 10:30 pm–midnight. Anything else that isn't on a Sunday (e.g. Christmas Eve) is an all-day event until a time is added to `SERVICE_TIMES` in `build_calendar.py`.
 
-- **Title:** `LBPC Worship Service: <sermon title> (<passage>)`
+**Each event looks like this:**
+
+- **Title:** `LBPC Worship: <sermon title> (<passage>)`
 - **Description:**
   ```
   Speaker: Rev Seet
