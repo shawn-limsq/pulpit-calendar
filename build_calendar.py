@@ -70,6 +70,19 @@ def clean(s):
     return "\n".join(ln for ln in lines if ln)
 
 
+def clean_person(s):
+    """Drop planning notes typed next to a name.
+
+    "Rev Tan EB Confirmed!" -> "Rev Tan EB"; "Wei En Yi?" -> "Wei En Yi (TBC)".
+    """
+    s = " ".join(s.split())
+    s = re.sub(r"\(?\b(?:not\s+(?:yet\s+)?confirmed|unconfirmed|tbc|tba|tbd|pending)\b\)?", "?", s, flags=re.I)
+    s = re.sub(r"\(?\bconfirmed\b[!.]*\)?", "", s, flags=re.I)
+    tentative = "?" in s
+    s = " ".join(s.replace("?", " ").replace("!", " ").split()).strip(" -–,;")
+    return f"{s} (TBC)" if tentative and s else s
+
+
 def parse_date(s):
     s = re.sub(r"\(.*?\)", "", clean(s)).strip()
     s = re.sub(r"^(mon|tue|wed|thu|fri|sat|sun)\w*,?\s*", "", s, flags=re.I)
@@ -155,6 +168,8 @@ def extract_services(rows):
                 series = vals.pop()
             continue
         svc = {f: get(f) for f in COLUMN_ALIASES if f != "date"}
+        svc["speaker"] = clean_person(svc["speaker"])
+        svc["chair"] = clean_person(svc["chair"])
         svc["date"], svc["series"] = d, series
         # Passage sometimes lands in Notes when Text is blank
         if not svc["text"] and SCRIPTURE_RE.search(svc["notes"]) and len(svc["notes"]) < 40:
