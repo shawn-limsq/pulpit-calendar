@@ -126,14 +126,17 @@ def main():
     print("Full-year candidates:", ", ".join(f["name"] for f in candidates))
     content, ext = download(s, meta)
     BASELINE_DIR.mkdir(parents=True, exist_ok=True)
-    target = BASELINE_DIR / f"schedule{ext}"
+    # Keep the Drive name (it carries the version number) and only this one
+    # file, so the Drive copy is always the one the calendar is built from.
+    target = BASELINE_DIR / f"{safe_stem(meta['name'])}{ext}"
     if target.exists() and target.read_bytes() == content:
         print(f"Full-year: using '{meta['name']}' (unchanged).")
     else:
-        for old in BASELINE_DIR.glob("schedule.*"):
-            old.unlink()
         target.write_bytes(content)
         print(f"Full-year: updated from '{meta['name']}'.")
+    for old in BASELINE_DIR.iterdir():
+        if old != target and old.suffix.lower() in (".docx", ".pdf", ".xlsx", ".csv"):
+            old.unlink()
     (BASELINE_DIR / "SOURCE.txt").write_text(f"{meta['name']}\nmodified {meta['modifiedTime']}\n")
 
     # --- quarterly files ---
