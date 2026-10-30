@@ -21,6 +21,9 @@
          text-decoration:none; cursor:pointer; }
   .btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
   @media (prefers-color-scheme: dark) { .btn.primary { color:#16161a; } }
+  .link { display:block; margin:4px auto 0; padding:8px; background:none; border:0;
+          color:var(--accent); font:inherit; font-size:.95rem; text-decoration:underline;
+          text-underline-offset:3px; cursor:pointer; }
   .note { font-size:.9rem; color:var(--muted); margin:4px 0 24px; }
   details { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
   summary { font-weight:600; cursor:pointer; }
@@ -33,9 +36,9 @@
   <h1>LBPC Pulpit Schedule</h1>
   <p class="sub">Subscribe once. Any change to the preaching schedule appears in your calendar automatically.</p>
 
-  <a class="btn primary" id="apple" href="#">Add to iPhone / iPad / Mac Calendar</a>
-  <a class="btn" id="google" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
-  <button class="btn" id="copy" type="button">Copy calendar link</button>
+  <a class="btn primary" id="apple" href="#">Add to Apple Calendar</a>
+  <a class="btn primary" id="google" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
+  <button class="link" id="copy" type="button">Copy calendar link</button>
   <p class="note">Each service appears as an all-day event. Tap it to see the passage, sermon title and notes.</p>
 
   <details>
