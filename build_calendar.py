@@ -38,9 +38,8 @@ SGT = timezone(timedelta(hours=8))  # Singapore, no daylight saving
 # None means an all-day event (time not confirmed).
 SERVICE_TIMES = [
     (("combined", "acm", "anniversary", "easter"), [(clock(9, 0), clock(10, 45))]),
-    (("good friday",), [(clock(9, 0), clock(10, 45))]),
+    (("good friday", "christmas eve"), [(clock(9, 0), clock(10, 45))]),
     (("watchnight",), [(clock(22, 30), clock(0, 0))]),   # ends at midnight
-    (("christmas eve",), None),                          # time not confirmed
 ]
 SUNDAY_TIMES = [(clock(8, 0), clock(9, 15)), (clock(11, 0), clock(12, 15))]
 
