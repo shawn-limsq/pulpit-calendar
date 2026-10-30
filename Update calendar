@@ -1,0 +1,57 @@
+name: Update calendar
+
+on:
+  # A new schedule file was uploaded to the repo
+  push:
+    branches: [main]
+    paths: ["schedule/**", "build_calendar.py"]
+  # Check the Google Drive folder for a newer version every hour (needs GDRIVE_SA_JSON)
+  schedule:
+    - cron: "17 * * * *"
+  # "Run workflow" button on the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-calendar
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history, so the newest schedule file can be found
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull latest schedule from Google Drive
+        env:
+          GDRIVE_SA_JSON: ${{ secrets.GDRIVE_SA_JSON }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+          QUARTERLY_NAME_PREFIX: ${{ vars.QUARTERLY_NAME_PREFIX }}
+        run: python fetch_from_drive.py
+
+      - name: Build calendar
+        run: python build_calendar.py
+
+      - name: Publish if anything changed
+        run: |
+          git config user.name "calendar-bot"
+          git config user.email "calendar-bot@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "Calendar unchanged."
+          else
+            git add schedule
+            git commit -m "Update calendar from latest schedule"
+            git push
+          fi
