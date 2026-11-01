@@ -42,10 +42,18 @@ SERVICE_TIMES = [
     (("watchnight",), [(clock(22, 30), clock(0, 0))]),   # ends at midnight
 ]
 SUNDAY_TIMES = [(clock(8, 0), clock(9, 15)), (clock(11, 0), clock(12, 15))]
+COMBINED_TIMES = [(clock(9, 0), clock(10, 45))]
+
+# Dates that are combined services even though the sermon title doesn't say so.
+COMBINED_DATES = {
+    date(2027, 2, 7),   # CNY (2nd day)
+}
 
 
 def service_times(svc):
     """List of (start, end) times for a service, or None for all-day."""
+    if svc["date"] in COMBINED_DATES:
+        return COMBINED_TIMES
     title = " ".join(svc["title"].split()).lower()
     for keywords, times in SERVICE_TIMES:
         if any(k in title for k in keywords):
